@@ -1,58 +1,57 @@
 #the trees got scrambled! use the tree name unscrambler to fix the mess
 
-#input from user
-#get from file
-
 import re
 
-scrambled_tree_names = "soak biRchwooDoAkdj164spalmjSn3oakD2baobaBbbdacaciasdacacAOAKir"
 tree_names = {'birch','acacia','oak','baobab','palm'}
 
-scrambled_tree_names = scrambled_tree_names.lower()
-print(scrambled_tree_names.count('oak'))
+def unscramble(scramled_string):
+	found_trees = []
+	for tree in tree_names:
+		found_trees += re.findall(tree,scramled_string.lower())
+	return found_trees
 
+
+
+scrambled_tree_names = "soak biRchwooDoAkdj164spalmjSn3oakD2baobaBbbdacaciasdacacAOAKir"
 ######## no regex, ineficient approach ##########
+
 found_trees = []
 for letter_pos in range(len(scrambled_tree_names)):
 	for tree in tree_names:
-		if(scrambled_tree_names.startswith(tree,letter_pos)):
+		if(scrambled_tree_names.lower().startswith(tree,letter_pos)):
 			found_trees.append(tree)
-print(found_trees)
+print(f"Static string (no regex): {found_trees}")
+
 #################################################
 
 
 ######## regex approach #########################
-found_trees = []
-for tree in tree_names:
-	tree_occurances = re.findall(tree,scrambled_tree_names)
-	found_trees += tree_occurances
-print("Static string:",found_trees)
+
+found_trees = unscramble(scrambled_tree_names)
+print(f"Static string:{found_trees}")
+
 #################################################
 
 
 ####### user input + regex ######################
-found_trees = []
+
 user_str = input("Enter string:")
-user_str = user_str.lower()
-for tree in tree_names:
-	tree_occurances = re.findall(tree,user_str)
-	found_trees += tree_occurances
-print("User inputed string:",found_trees)
+print(f"User inputed string: {unscramble(user_str)}")
+
 #################################################
 
 
 ####### str from file + regex ###################
-found_trees = []
+
 file = open("scrambled.txt","r")
 scrambled_file_text = file.read()
-scrambled_file_text = scrambled_file_text.lower()
-for tree in tree_names:
-	found_trees += re.findall(tree,scrambled_file_text)
-print("Trees from file:",found_trees)
 file.close()
-
+found_trees = unscramble(scrambled_file_text)
+print(f"Trees from file: {found_trees}")
 
 file = open("unscrambled.txt","w")
 for tree in found_trees:
-	file.write(tree)
+	file.write(f"{tree} ")
+file.close()
+
 #################################################
