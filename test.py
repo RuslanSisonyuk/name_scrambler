@@ -9,7 +9,7 @@ scrambled_tree_names = "soak biRchwooDoAkdj164spalmjSn3oakD2baobaBbbdacaciasdaca
 tree_names = {'birch','acacia','oak','baobab','palm'}
 
 scrambled_tree_names = scrambled_tree_names.lower()
-print(scrambled_tree_names.count('oak'))
+#print(scrambled_tree_names.count('oak'))
 
 found_trees = []
 ######## no regex, ineficient approach ##########
