@@ -3,6 +3,7 @@
 import re
 
 tree_names = {'birch','acacia','oak','baobab','palm'}
+_file_name = "unscrambled.txt"
 
 def unscramble(scramled_string):
 	found_trees = []
@@ -10,6 +11,11 @@ def unscramble(scramled_string):
 		found_trees += re.findall(tree,scramled_string.lower())
 	return found_trees
 
+def write_file(unscrambled_string,file_name):
+	file = open(file_name,"w")
+	for tree in unscrambled_string:
+		file.write(f"{tree} ") 
+	file.close()
 
 
 scrambled_tree_names = "soak biRchwooDoAkdj164spalmjSn3oakD2baobaBbbdacaciasdacacAOAKir"
@@ -49,9 +55,6 @@ file.close()
 found_trees = unscramble(scrambled_file_text)
 print(f"Trees from file: {found_trees}")
 
-file = open("unscrambled.txt","w")
-for tree in found_trees:
-	file.write(f"{tree} ")
-file.close()
+write_file(found_trees,_file_name)
 
 #################################################
